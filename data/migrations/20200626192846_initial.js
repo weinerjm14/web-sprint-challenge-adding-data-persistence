@@ -4,7 +4,7 @@ exports.up = async function (knex) {
       tbl.increments(),
         tbl.text('name').notNullable(),
         tbl.text('description'),
-        tbl.boolean('isDone').notNullable().default('false');
+        tbl.boolean('isDone').defaultTo(false);
     })
     .createTable('tasks', tbl => {
       tbl.increments(),
@@ -19,7 +19,7 @@ exports.up = async function (knex) {
           .onDelete('CASCADE');
       tbl.text('discription').notNullable(),
         tbl.text('notes'),
-        tbl.boolean('isDone').notNullable().default('false');
+        tbl.boolean('isDone').defaultTo(false);
     })
     .createTable('resources', tbl => {
       tbl.increments(), tbl.text('name').notNullable(), tbl.text('description');
