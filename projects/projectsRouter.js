@@ -27,6 +27,7 @@ router.get('/tasks', (req, res) => {
       res.json(tasks);
     })
     .catch(err => {
+      console.log(err.message);
       res.status(500).json({ message: 'Failed to get tasks', err });
     });
 });
@@ -37,7 +38,8 @@ router.post('/', (req, res) => {
       res.status(201).json(project);
     })
     .catch(err => {
-      res.status(500).json({ message: 'Failed to create new project', err });
+      console.log(err.message);
+      res.status(500).json({ message: 'Failed to create new project,' });
     });
 });
 router.post('/resources', (req, res) => {
@@ -45,6 +47,16 @@ router.post('/resources', (req, res) => {
   Projects.addResource(resource)
     .then(resource => {
       res.status(201).json(resource);
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'Failed to create new resource', err });
+    });
+});
+router.post('/tasks', (req, res) => {
+  const task = req.body;
+  Projects.addTasks(task)
+    .then(task => {
+      res.status(201).json(task);
     })
     .catch(err => {
       res.status(500).json({ message: 'Failed to create new resource', err });
